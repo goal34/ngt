@@ -1,0 +1,290 @@
+A.  Write a MongoDB query to Create and Drop Database.
+-mongosh
+-Show dbs
+-use mydb
+-db.dropDatabase()
+-show dbs
+B.  Write a MongoDB query to Create, Display and Drop Collection.
+-show dbs
+-use classmate
+-db.class.insertOne({name:”sanika”,Age:20})
+-db.class.insertMany([{name:”sanika”,Age:20},{name:”palak”,Age:21},{name:”damini”,Age:22}])
+-db.class.find()
+-db.class.drop()
+-db.class.find()
+
+PRACTICAL 2:SIMPLE QUERIES WITH MONGODB
+
+A.  Implementing CRUD.
+-db.products.insertMany([{_id:1,name:”laptop”,price:1200,brand:”dell”}, {_id:1,name:”phone”,price:400,brand:”apple”}, {_id:3,name:”watch”,price:800,brand:”fossil”}])
+
+-db.products.find()
+-db.products.find(price:{$eq:1200}})
+-db.products.find(brand:{$ne:”apple”}})
+-db.products.find(price:{$gt:500}})
+-db.products.find(price:{$gt:1100}})
+-db.products.find(price:{$lt:900}})
+-db.products.find(brand:{$in:[“apple”,”dell”]}})
+-db.products.find(brand:{$nin:[“apple”,”dell”]}})
+-db.products.updateOne({name:”watch”},{$set:{price:600}})
+-db.products.find()
+-db.products.insertOne({_id:4,name:”airdopes”,price:900,brand:”fossil”})
+
+-db.products.updateMany({brand:”fossil”},{$set:{brand:”Samsung”}})
+-db.products.find()
+-db.products.find(brand:”Samsung”}).sort({price:1})
+-db.products.deleteOne({name:”laptop”})
+-db.products.find()
+-db.products.deleteMany({price:800})
+-db.products.find()
+-db.products.drop()
+
+
+PRACTICAL 3: IMPLEMENTING AGGREGATION
+ A) Write a mongodb query to use sum, average, min and max expression
+. >show dbs
+ >use ordercollection 
+>db.orders.insertMany([{item:”pen”,qty:10,price:5},{item:”book”,qty:5,price:10},{item:”tissu e”,qty:15,price:20},{item:”pencil”,qty:30,price:15}])
+ >db.orders.find()
+ >db.orders.aggregate([{$addFields:{amount:{$multiply:[“$qty”,”$price”]}}}]) 
+>db.orders.aggregate([{$group:{_id:null,totalQty:{$sum:”$qty”},avgPrice:{$avg:”$price”},min Price:{$min:”$price”},maxPrice:{$max:”$price”}}}])
+
+ B) write a mongodb query to use Push and addToSet expression
+ >use salescollection
+ >db.sales.insertMany([{_id:1,customer:”sanika”,item:”banana”}, {_id:2,customer:”damini”,item:”mango”},{_id:3,customer:”palak”,item:”cherry”}, {_id:4,customer:”priya”,item:”orange”}])
+ >db.sales.find()
+ >db.sales.aggregate([{$group:{_id:”customer”,allItems:{$push:”$item”}}}]) 
+>db.sales.aggregate([{$group:{_id:”customer”,uniqueItems:{$addToSet:”$item”}}}]
+
+
+PRACTICAL:4
+ A) Write a mongodb query to create replica of exixting database.
+ >use school 
+>db.school.insertMany([{name:”sanika”,age:12},{name:”soniya”,age:19},{name:”sweata”,ag e:20},{name:”priyanka”,age:16},{name:”priya”,age:14}])
+ >db.school.find()
+ >db.school.aggregate([{$match:{}},{$out:{db:”college”,coll:”newstuds”}}])
+ >show dbs
+ >use college 
+>db.newstuds.find()
+
+PRACTICAL 5:PROGRAMS ON BASIC jQuery
+
+A.  jQuery Basic, jQuery Events.
+
+	jQuery Basic CODE:
+<html>
+<head>
+<title>basic jQuery example</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js">
+</script>
+</head>
+<body>
+<h2>HELLO, jQuery!</h2>
+<button id="btn">Click me</button>
+<script>
+$(document).ready(function(){
+$("#btn").click(function(){
+$("h2").text("welcome to jquery!");
+});
+});
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+	jQuery Events CODE:
+<html>
+<head>
+<title>jquery events</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js">
+</script>
+<body>
+<p id="para">hover or click me</p>
+<script>
+$(document).ready(function(){
+$("#para").click(function(){
+$(this).css("color","red");
+});
+$("#para").mouseenter(function(){
+$(this).css("background","yellow");
+});
+$("#para").mouseleave(function(){
+$(this).css("background","white");
+});
+});
+</script>
+</body>
+</html>
+
+
+B.  jQuery Selectors, jQuery Hide and Show Effects.
+	jQuery Selectors CODE:
+<html>
+<head>
+<title>jquery selector</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js">
+</script>
+<body>
+<p class="cls">this is class selector</p>
+<p id="id1">this is id selector</p>
+<p id="id2">this is tag selector</p>
+<script>
+$(document).ready(function(){
+$(".cls").css("color","blue");
+$("#id1").css("font-size","20px");
+$("#id2").css("font-weight","bold");
+});
+</script>
+</body>
+</html>
+
+
+	jQuery Hide and Show Effects CODE:
+<html>
+<head>
+<title>hide show example</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js">
+</script>
+</head>
+<body>
+<p id="text">this is a paragraph</p>
+<button id="hide">hide</button>
+<button id="show">show</button>
+<script>
+$(document).ready(function(){
+$("#hide").click(function(){
+$("#text").hide();
+});
+$("#show").click(function(){
+$("#text").show();
+});
+});
+</script>
+</body>
+</html>
+
+
+PRACTICAL 6:jQuery ADVANCED
+
+A.  jQuery Animation Effects, jQuery Chaining.
+	jQuery Animation Effects CODE:
+<html>
+<head>
+<title>JQUERY ANIMATION</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js">
+</script>
+<style>
+#box{width:100px;height:100px;background:purple;position:relative;}
+</style>
+</head>
+<body>
+<button id="animate">ANIMATE BOX</button>
+<div id="box"></div>
+<script>
+$(document).ready(function(){
+$("#animate").click(function(){
+$("#box").animate({
+left:'250px',
+width:'150px',
+height:'150px',
+opacity:0.5
+},2000);
+});
+});
+</script>
+</body>
+</html>
+
+
+	jQuery Chaining CODE:
+<html>
+<head>
+<title>JQUERY CHAINING</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js">
+</script>
+<body>
+<p id="para">WATCH ME CHANGE!!!</p>
+<button id="chain">CLICK ME</button>
+<script>
+$(document).ready(function(){
+$("#chain").click(function(){
+$("#para").css("color","red")
+.slideUp(1000)
+.slideDown(1000)
+.fadeIn(1000)
+.fadeOut(1000);
+});
+});
+</script>
+</body>
+</html>
+
+B.  jQuery Callback, jQuery Get and Set Contents.
+	jQuery Callback CODE:
+<html>
+<head>
+<title>JQUERY CALLBACK</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js">
+</script>
+<body>
+<button id="fade">FADE OUT WITH CALLBACK</button>
+<p id="msg">i will fade out first, then show an alert.</p>
+<script>
+$(document).ready(function(){
+$("#fade").click(function(){
+$("#msg").fadeOut(2000,function(){
+alert("paragraph is now hidden!");
+});
+});
+});
+</script>
+</body>
+</html>
+
+
+	jQuery Get and Set Contents CODE:
+<html>
+<head>
+<title>JQUERY GET & SET</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js">
+</script>
+</head>
+<body>
+<p id="para">this is the original text</p>
+<button id="get">get</button>
+<button id="set">set</button>
+<script>
+$(document).ready(function(){
+$("#get").click(function(){
+alert($("#para").text());
+});
+$("#set").click(function(){
+$("#para").text("this is the new text");
+});
+});
+</script>
+</body>
+</html>
+
+A) Creating JSON
+ >use collegenew
+
+ >db.studs.insertMany([{name:”damini”,age:19,course:”BSCIT”,subjects:[“python”,”AI”]}, ([{name:”sanika”,age:20,course:”BSCIT”,subjects:[“java”,”AWP”]}, ([{name:”palak”,age:20,course:”BSCIT”,subjects:[“spm”,”AI”]} ([{name:”amisha”,age:30,course:”BSCIT”,subjects:[“BI”,”AI”]}
+
+ >db.studs.find()
+
+ > db.collegenew.find().pretty()
+
+
+
+B) Parsing JSON
+
+ >db.studs.find({name:”priya”})
+
+ > db.studs.find({age:{$gt:19}})
+
