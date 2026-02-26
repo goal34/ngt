@@ -1,0 +1,34 @@
+PRACT 1 
+
+STEP 1 : ping all the pc 
+
+STEP 2 :  
+R1 
+router ospf 1  
+area 0 authentication message-digest  
+exit 
+R2: 
+router ospf 2 
+area 0 authentication message-digest  
+exit 
+R3 
+router ospf 3 
+area 0 authentication message-digest  
+exit 
+
+STEP 3: DO THIS IN ALL THE THREE ROUTER (SELECT INTERFACE IN ROUTER) 
+interface s0/1/0 
+ip ospf message-digest-key 1 md5 MD5pa55 
+exit 
+
+STEP 4: TO CHECK WRITE SHOW IP OSPF INTERFACE 
+
+STEP 5: GO TO PC AND SERVICES, NTP Key 1 md5 NTPpa55 
+
+STEP 6: ALL THE THREE ROUTER 
+ntp server 192.168.1.5 
+ntp update-calendar 
+ntp authenticate 
+ntp trusted-key 1 
+ntp authentication-key 1 md5 NTPpa55 
+service timestamps log datetime msec
