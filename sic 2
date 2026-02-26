@@ -1,0 +1,44 @@
+PRACT 2 
+
+STEP 1: FIRST PING
+
+STEP 2: R1  
+
+username admin1 secret admin1pa55  
+aaa new-model  
+aaa authentication login default local  
+line console 0  
+login authentication default  
+end  
+ip domain-name ccnasecurity.com  
+crypto key generate rsa  
+1024  
+aaa authentication login SSH-LOGIN local  
+line vty 0 4  
+login authentication SSH-LOGIN  
+transport input ssh  
+end  
+
+STEP 4: GO IN THE PC AND WRITE ssh -l admin1 192.168.1.1  
+
+STEP 5: R2 
+
+username admin2 secret admin2pa55  
+tacacs-server host 192.168.2.2  
+tacacs-server key tacacspa55  
+aaa new-model  
+aaa authentication login default group tacacs+ local  
+line console 0  
+login authentication default  
+end 
+
+STEP 6: R3 
+
+username admin3 secret admin3pa55  
+radius-server host 192.168.3.2  
+radius-server key radiuspa55  
+aaa new-model  
+aaa authentication login default group radius+ local  
+line console 0  
+login authentication default  
+end
