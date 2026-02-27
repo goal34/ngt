@@ -1,0 +1,22 @@
+data <- data.frame(Hours = c(1,2,3,4,5,6,7,8),
+                   Result = c(0,0,0,0,1,1,1,1))
+print(data)
+model <- glm(Result ~ Hours, data = data, family = binomial)
+summary(model)
+probabilites <- predict(model, type = "response")
+print(probabilites)
+predicted_class <- ifelse(probabilites > 0.5, 1, 0)
+print(predicted_class)
+data$predicted_Prob <- probabilites
+data$predicted_Class <- predicted_class
+print(data)
+plot(data$Hours, data$Result,
+     xlab = "Hours studied",
+     ylab = "Result",
+     main = "logistic Regression",
+     pch = 16,
+     col = "blue")
+curve(predict(model, data.frame(Hours = x), type = "response"),
+      add = TRUE,
+      col = "red",
+      lwd = 2)
