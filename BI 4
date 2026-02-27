@@ -1,0 +1,16 @@
+data(iris)
+head(iris)
+str(iris)
+# install.packages("rpart")
+library(rpart)
+set.seed(1)
+index <- sample(1:nrow(iris), 0.7 * nrow(iris))
+train <- iris[index, ]
+test <- iris[-index, ]
+model <- rpart(Species ~ Sepal.Length + Sepal.Width + Petal.Width,
+               data = train,
+               method = "class")
+result <- predict(model, test, type = "class")
+table(result, test$Species)
+accuracy <- sum(result == test$Species) / nrow(test)
+accuracy
