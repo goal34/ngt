@@ -1,0 +1,24 @@
+data <- data.frame(
+  Hours = c(1, 2, 3, 4, 5, 6, 7, 8),
+  Marks = c(35, 40, 50, 55, 65, 70, 75, 85)
+)
+print(data)
+# Build Linear Regression model
+model <- lm(Marks ~ Hours, data = data)
+# View model summary
+summary(model)
+# Predict values
+predicted_values <- predict(model)
+print(predicted_values)
+# Add predicted values to dataset
+data$Predicted_Marks <- predicted_values
+print(data)
+# Plot original data
+plot(data$Hours, data$Marks,
+     xlab = "Hours Studied",
+     ylab = "Marks",
+     main = "Linear Regression",
+     col = "blue",
+     pch = 16)
+# Add regression line
+abline(model, col = "red", lwd = 2)
